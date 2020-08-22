@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Focus</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <title>Dinamic valdation</title>
+    <style>
+        .error {
+            border: 2px solid red;
+        }
+    </style>
+</head>
+
+<body onload="validate()">
+    <label for="email">Enter email:</label>
+    <input id="email" type="text" />
+    <script>
+        function validate() {
+            let emailRegExp = /^[a-z]+@[a-z]+\.[a-z]+$/;
+            let $inputEl = $('#email');
+            $inputEl.change(validateEmail);
+
+            function validateEmail() {
+                if(!emailRegExp.test($inputEl.val())){
+                    $inputEl.addClass('error');
+                }else{
+                    $inputEl.removeClass('error');
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

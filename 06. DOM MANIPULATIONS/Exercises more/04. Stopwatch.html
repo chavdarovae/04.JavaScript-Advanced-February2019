@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <title>Stopwatch</title>
+</head>
+
+<body>
+    <div id="time" style="border:3px solid blue; text-align:center; font-size:2em; margin-bottom:10px">00:00</div>
+    <button id="startBtn">Start</button>
+    <button id="stopBtn" disabled="true">Stop</button>
+    <script>
+        window.onload = function stopWatch() {
+            $('#startBtn').click(resetTimer);
+            $('#stopBtn').click(stopTimer);
+            let myTimer;
+
+            function resetTimer() {
+                $('#time').text(`00:00`)
+                myTimer = setInterval(timingFunction, 1000);
+                seconds = 1;
+                minutes = 0;
+                $(this).attr('disabled', true);
+                $('#stopBtn').attr('disabled', false);
+            }
+
+            function stopTimer() {
+                clearInterval(myTimer);
+                $(this).attr('disabled', true);
+                $('#startBtn').attr('disabled', false);
+            }
+
+            function timingFunction() {
+                $('#time').text(`${padTimeDisplay(minutes)}:${padTimeDisplay(seconds)}`);
+                if (seconds < 59) {
+                    seconds++;
+                } else if (seconds === 59) {
+                    minutes++;
+                    seconds = 0;
+                }
+            }
+
+            function padTimeDisplay(time) {
+                time = '0' + time;
+                return time.slice(-2)
+            }
+        }
+    </script>
+</body>
+
+</html>
